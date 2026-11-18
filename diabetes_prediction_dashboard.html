@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlucoLens | Diabetes Prediction</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#718096;--line:#e7ebf2;--blue:#4568f5;--blue2:#eef1ff;--teal:#18a999;--red:#e46b70;--shadow:0 12px 34px rgba(29,48,86,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink)}button,input,select{font:inherit}.shell{display:flex;min-height:100vh}.side{width:245px;background:#111a2d;color:#dce4f6;padding:28px 18px;display:flex;flex-direction:column}.brand{font-size:20px;font-weight:800;letter-spacing:-.5px;padding:0 12px 34px}.brand span{color:#7e96ff}.navlabel{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#8490aa;padding:0 12px 12px}.nav a{display:flex;gap:12px;align-items:center;color:#b9c4da;text-decoration:none;padding:12px;border-radius:10px;margin:3px 0}.nav a.active,.nav a:hover{background:#263454;color:#fff}.nav .ico{width:20px;text-align:center}.sidebottom{margin-top:auto;padding:16px 12px;color:#8f9bb3;font-size:12px;border-top:1px solid #29334a}.main{flex:1;min-width:0;padding:30px 4.2vw 50px;max-width:1500px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px}.eyebrow{color:var(--blue);font-size:11px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase}.top h1{font-size:27px;letter-spacing:-.8px;margin:4px 0}.sub{color:var(--muted);margin:0}.pill{background:#eaf8f5;color:#148b7d;border-radius:30px;padding:8px 13px;font-size:12px;font-weight:700}.hero{background:linear-gradient(115deg,#263d83,#4568f5 65%,#7188ff);color:#fff;border-radius:20px;padding:27px 30px;display:flex;justify-content:space-between;gap:20px;align-items:center;box-shadow:var(--shadow);margin-bottom:22px}.hero h2{font-size:23px;letter-spacing:-.5px;margin:4px 0 7px}.hero p{color:#e0e7ff;margin:0;max-width:670px}.hero .tag{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:#cbd5ff}.hero-icon{font-size:55px;opacity:.9;padding:0 15px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:22px}.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.stat{padding:17px 19px}.stat small{color:var(--muted);font-weight:600}.stat strong{display:block;font-size:25px;margin:5px 0 0;letter-spacing:-.6px}.stat em{font-style:normal;color:var(--teal);font-size:11px}.layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);gap:18px}.panel{padding:22px;margin-bottom:18px}.panelhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px;gap:12px}.panel h3{font-size:16px;margin:0}.panelhead p{color:var(--muted);font-size:12px;margin:3px 0 0}.sectiontag{font-size:11px;color:var(--blue);background:var(--blue2);padding:6px 10px;border-radius:20px;font-weight:700}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field label{display:block;color:#58647a;font-size:12px;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;border:1px solid #dfe5ef;border-radius:9px;padding:10px 11px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #4568f51c}.hint{color:#98a1b1;font-size:10px;margin-top:4px}.btn{border:0;border-radius:9px;background:var(--blue);color:#fff;padding:11px 16px;font-weight:700;cursor:pointer}.btn:hover{background:#3455e6}.btn.secondary{background:#eef1ff;color:#3f5de1}.actions{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}.result{border-radius:13px;background:#f6f8ff;padding:18px;min-height:205px;display:flex;flex-direction:column;justify-content:center}.result.empty{text-align:center;color:#929caf}.result .risk{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:800}.result .big{font-size:29px;font-weight:800;margin:5px 0}.result p{font-size:12px;color:#64718a;margin:4px 0}.result.low{background:#eaf8f5;color:#147e72}.result.high{background:#fff0f0;color:#b34d55}.meter{height:8px;background:#e5eaf4;border-radius:20px;overflow:hidden;margin:13px 0 5px}.meter span{display:block;height:100%;width:0;background:var(--blue);border-radius:20px;transition:width .3s}.result.low .meter span{background:var(--teal)}.result.high .meter span{background:var(--red)}.models{display:grid;grid-template-columns:1fr 1fr;gap:10px}.model{border:1px solid var(--line);border-radius:11px;padding:13px}.model b{font-size:13px;display:block}.model small{color:var(--muted);font-size:11px}.model .state{float:right;color:#159786;font-size:10px;font-weight:800}.chart{display:flex;align-items:end;gap:14px;height:150px;padding:15px 8px 0;border-bottom:1px solid var(--line)}.barwrap{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:7px}.bar{width:70%;max-width:48px;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#8094ff,#4568f5);min-height:3px}.barwrap small{font-size:10px;color:var(--muted);white-space:nowrap}.chartnote{font-size:11px;color:var(--muted);margin-top:12px}.table{width:100%;border-collapse:collapse;font-size:12px}.table th{text-align:left;color:#8590a3;font-size:10px;text-transform:uppercase;letter-spacing:.7px;padding:9px;border-bottom:1px solid var(--line)}.table td{padding:11px 9px;border-bottom:1px solid #f0f2f6}.table tr:last-child td{border:0}.foot{color:#9aa3b2;text-align:center;font-size:11px;margin-top:10px}.disclaimer{font-size:11px;color:#9a6b30;background:#fff8e9;border:1px solid #f5e7c8;border-radius:10px;padding:11px 13px;margin-top:15px}
+@media(max-width:900px){.side{width:68px;padding:20px 9px}.brand{font-size:0;padding:0 9px 30px}.brand:after{content:"G";font-size:21px}.navlabel,.nav a span:not(.ico),.sidebottom{display:none}.nav a{justify-content:center;padding:13px 5px}.main{padding:24px 20px}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.main{padding:20px 13px}.top{align-items:flex-start;flex-direction:column}.hero{padding:22px}.hero-icon{display:none}.layout{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr 1fr}.stats{gap:9px}.stat{padding:13px}.stat strong{font-size:21px}.models{grid-template-columns:1fr 1fr}.panel{padding:16px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="side">
+  <div class="brand">Gluco<span>Lens</span></div>
+  <div class="navlabel">Workspace</div>
+  <nav class="nav">
+    <a class="active" href="#overview"><span class="ico">◫</span><span>Overview</span></a>
+    <a href="#predict"><span class="ico">⌁</span><span>Risk prediction</span></a>
+    <a href="#models"><span class="ico">▦</span><span>ML models</span></a>
+    <a href="#comparison"><span class="ico">▥</span><span>Comparison</span></a>
+  </nav>
+  <div class="sidebottom">CAPSTONE PROJECT<br>Machine Learning · 2026</div>
+</aside>
+<main class="main" id="overview">
+  <header class="top">
+    <div><div class="eyebrow">Machine learning research dashboard</div><h1>Diabetes Prediction & Model Analysis</h1><p class="sub">An ensemble comparison of four machine learning algorithms.</p></div>
+    <span class="pill">● Demo interface</span>
+  </header>
+  <section class="hero">
+    <div><div class="tag">Capstone project</div><h2>Predict. Compare. Understand.</h2><p>Explore how Decision Tree, k-Nearest Neighbors, Naïve Bayes and Multi-Layer Perceptron models can be evaluated for diabetes risk prediction.</p></div>
+    <div class="hero-icon">✚</div>
+  </section>
+  <section class="stats">
+    <div class="stat"><small>Algorithms evaluated</small><strong>04</strong><em>Four model approaches</em></div>
+    <div class="stat"><small>Input parameters</small><strong>08</strong><em>Clinical dataset features</em></div>
+    <div class="stat"><small>Prediction classes</small><strong>02</strong><em>Positive / Negative</em></div>
+    <div class="stat"><small>Evaluation focus</small><strong>5 metrics</strong><em>Performance comparison</em></div>
+  </section>
+  <div class="layout">
+    <div>
+      <section class="panel" id="predict">
+        <div class="panelhead"><div><h3>Diabetes risk prediction</h3><p>Enter sample values to preview the interface.</p></div><span class="sectiontag">Interactive demo</span></div>
+        <div class="formgrid">
+          <div class="field"><label for="preg">Pregnancies</label><input id="preg" type="number" min="0" max="20" value="2"></div>
+          <div class="field"><label for="glucose">Glucose (mg/dL)</label><input id="glucose" type="number" min="0" max="300" value="120"></div>
+          <div class="field"><label for="bp">Blood pressure (mm Hg)</label><input id="bp" type="number" min="0" max="200" value="70"></div>
+          <div class="field"><label for="skin">Skin thickness (mm)</label><input id="skin" type="number" min="0" max="100" value="20"></div>
+          <div class="field"><label for="insulin">Insulin (µU/mL)</label><input id="insulin" type="number" min="0" max="900" value="80"></div>
+          <div class="field"><label for="bmi">BMI (kg/m²)</label><input id="bmi" type="number" min="0" max="90" step=".1" value="27.5"></div>
+          <div class="field"><label for="dpf">Diabetes pedigree function</label><input id="dpf" type="number" min="0" max="3" step=".01" value=".45"></div>
+          <div class="field"><label for="age">Age (years)</label><input id="age" type="number" min="1" max="120" value="30"></div>
+        </div>
+        <div class="actions"><button class="btn" onclick="predict()">Run demo prediction</button><button class="btn secondary" onclick="resetForm()">Reset values</button></div>
+        <div class="disclaimer">Educational prototype only. This demo uses a simple illustrative scoring rule, not your trained ML models. It is not a medical diagnosis or a substitute for professional advice.</div>
+      </section>
+      <section class="panel" id="comparison">
+        <div class="panelhead"><div><h3>Model performance comparison</h3><p>Replace these illustrative values with your experiment results.</p></div><span class="sectiontag">Sample data</span></div>
+        <div class="chart" aria-label="Illustrative model accuracy chart">
+          <div class="barwrap"><div class="bar" style="height:78%"></div><small>Decision Tree</small></div>
+          <div class="barwrap"><div class="bar" style="height:74%"></div><small>k-NN</small></div>
+          <div class="barwrap"><div class="bar" style="height:76%"></div><small>Naïve Bayes</small></div>
+          <div class="barwrap"><div class="bar" style="height:82%"></div><small>MLP</small></div>
+        </div>
+        <p class="chartnote">Illustrative accuracy values only — not measured results. Use the same train/test split and preprocessing for a fair comparison.</p>
+      </section>
+    </div>
+    <div>
+      <section class="panel">
+        <div class="panelhead"><div><h3>Prediction output</h3><p>Demo result appears here.</p></div></div>
+        <div class="result empty" id="result"><div style="font-size:30px">⌁</div><b>No prediction yet</b><p>Enter the sample values and select “Run demo prediction”.</p></div>
+      </section>
+      <section class="panel" id="models">
+        <div class="panelhead"><div><h3>Algorithms in this study</h3><p>Four classifiers under comparison.</p></div></div>
+        <div class="models">
+          <div class="model"><span class="state">CLASSIFIER</span><b>Decision Tree</b><small>Rule-based splitting</small></div>
+          <div class="model"><span class="state">CLASSIFIER</span><b>k-NN</b><small>Distance-based learning</small></div>
+          <div class="model"><span class="state">CLASSIFIER</span><b>Naïve Bayes</b><small>Probabilistic approach</small></div>
+          <div class="model"><span class="state">CLASSIFIER</span><b>MLP</b><small>Neural network model</small></div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="panelhead"><div><h3>Evaluation metrics</h3><p>Report all models using the same metrics.</p></div></div>
+        <table class="table"><thead><tr><th>Metric</th><th>What it measures</th></tr></thead><tbody>
+          <tr><td>Accuracy</td><td>Overall correct predictions</td></tr>
+          <tr><td>Precision</td><td>Reliability of positive predictions</td></tr>
+          <tr><td>Recall</td><td>Positive cases correctly found</td></tr>
+          <tr><td>F1-score</td><td>Precision–recall balance</td></tr>
+          <tr><td>ROC-AUC</td><td>Class separation ability</td></tr>
+        </tbody></table>
+      </section>
+    </div>
+  </div>
+  <div class="foot">GlucoLens · Academic capstone demonstration · Not for clinical use</div>
+</main>
+</div>
+<script>
+function val(id){return Number(document.getElementById(id).value)}
+function predict(){
+ const ids=['preg','glucose','bp','skin','insulin','bmi','dpf','age'];
+ const values=ids.map(val);
+ if(values.some(v=>!Number.isFinite(v)||v<0)){alert('Please enter valid non-negative values in every field.');return}
+ // A deliberately illustrative rule-based score, not a trained classifier.
+ let score=0;
+ score += Math.max(0,Math.min(1,(values[1]-90)/100))*35;
+ score += Math.max(0,Math.min(1,(values[5]-22)/20))*20;
+ score += Math.max(0,Math.min(1,(values[7]-25)/55))*15;
+ score += Math.max(0,Math.min(1,values[6]/1.5))*12;
+ score += Math.max(0,Math.min(1,values[0]/10))*8;
+ score += Math.max(0,Math.min(1,(values[2]-60)/60))*5;
+ score += Math.max(0,Math.min(1,values[4]/300))*5;
+ score=Math.round(score);
+ const high=score>=50, el=document.getElementById('result');
+ el.className='result '+(high?'high':'low');
+ el.innerHTML=`<div class="risk">${high?'Higher illustrative score':'Lower illustrative score'}</div><div class="big">${score}/100</div><b>${high?'Demo indicates elevated score':'Demo indicates lower score'}</b><div class="meter"><span style="width:${score}%"></span></div><p>This is a UI demonstration score only. It is not generated by Decision Tree, k-NN, Naïve Bayes or MLP.</p>`;
+}
+function resetForm(){
+ const defaults={preg:2,glucose:120,bp:70,skin:20,insulin:80,bmi:27.5,dpf:.45,age:30};
+ Object.entries(defaults).forEach(([k,v])=>document.getElementById(k).value=v);
+ const el=document.getElementById('result');el.className='result empty';el.innerHTML='<div style="font-size:30px">⌁</div><b>No prediction yet</b><p>Enter the sample values and select “Run demo prediction”.</p>';
+}
+</script>
+</body>
+</html>
